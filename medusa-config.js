@@ -47,6 +47,9 @@ const plugins = [
     /** @type {import('@medusajs/admin').PluginOptions} */
     options: {
       autoRebuild: false,
+      develop: {
+        open: process.env.OPEN_BROWSER !== "false",
+      },
     },
   },
 ];
@@ -80,5 +83,6 @@ const projectConfig = {
 /** @type {import('@medusajs/medusa').ConfigModule} */
 module.exports = {
   projectConfig,
+  plugins,
   modules,
 };
