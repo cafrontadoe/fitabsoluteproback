@@ -26,7 +26,7 @@ const ADMIN_CORS =
   process.env.ADMIN_CORS || "http://localhost:7000,http://localhost:7001";
 
 // CORS to avoid issues when consuming Medusa from a client
-const STORE_CORS = "/vercel\.app$/" || "http://localhost:8000";
+const STORE_CORS = "https://fitabsoluteprofront-cafrontadoe.vercel.app/,https://fitabsoluteprofront-cafrontadoe.vercel.app" || "http://localhost:8000";
 
 const DATABASE_URL =
   process.env.DATABASE_URL || "postgres://localhost/medusa-starter-default";
