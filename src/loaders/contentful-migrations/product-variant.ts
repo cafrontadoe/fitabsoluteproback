@@ -33,3 +33,4 @@ import Migration, {
       .name("Medusa ID")
       .type("Symbol")
   }
+  
