@@ -31,9 +31,9 @@ const STORE_CORS = "https://fitabsoluteprofront-cafrontadoe.vercel.app/,https://
 const DATABASE_URL =
   process.env.DATABASE_URL || "postgres://localhost/medusa-starter-default";
 
-const REDIS_URL = process.env.REDIS_URL || "redis://localhost:6379";
+const REDIS_URL = process.env.REDIS_URL || "redis://default:Lnb6LIMDHJn23ggl5lejKjPaiiFg61pL@roundhouse.proxy.rlwy.net:42575";
 
-const STRIPE_API_KEY = process.env.STRIPE_API_KEY || "redis://localhost:6379"
+const STRIPE_API_KEY = process.env.STRIPE_API_KEY || ""
 
 const plugins = [
   `medusa-fulfillment-manual`,
@@ -70,6 +70,48 @@ const plugins = [
         access_key_id: process.env.S3_ACCESS_KEY_ID,
         secret_access_key: process.env.S3_SECRET_ACCESS_KEY,
         cache_control: process.env.S3_CACHE_CONTROL
+    },
+  },
+  {
+    resolve: `medusa-plugin-contentful`,
+    options: {
+      space_id: process.env.CONTENTFUL_SPACE_ID,
+      access_token: process.env.CONTENTFUL_ACCESS_TOKEN,
+      environment: process.env.CONTENTFUL_ENV,
+      custom_product_fields: {
+        title: "name",
+        subtitle: "subtitle",
+        description: "description",
+        variants: "variants",
+        options: "options",
+        medusaId: "medusaId",
+        type: "type",
+        collection: "collection",
+        tags: "tags",
+        handle: "handle",
+      },
+      custom_variant_fields: {
+        title: "name",
+        sku: "sku",
+        prices: "prices",
+        options: "options",
+        medusaId: "medusaId"
+      },
+      custom_region_fields: {
+        name: "name",
+        countries: "countries",
+        paymentProviders: "paymentProviders",
+        fulfillmentProviders: "fulfillmentProviders",
+        medusaId: "medusaId"
+      },
+      custom_collection_fields: {
+        title: "title",
+        medusaId: "medusaId"
+      },
+      custom_type_fields: {
+        name: "name",
+        medusaId: "medusaId"
+      },
     },
   },
 ];
