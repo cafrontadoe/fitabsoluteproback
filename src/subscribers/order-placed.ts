@@ -17,8 +17,6 @@ import {
       relations: ["items"],
     })
   
-    console.log('================ZZZZZZZZZZZZZZZZZzzzzzzzzzzZZZZZZZZZZZZZZ');
-    console.log('order???????????????????????', order);
     sendGridService.sendEmail({
       templateId: "order-confirmation",
       from: "fitabsolutepro@gmal.com",
