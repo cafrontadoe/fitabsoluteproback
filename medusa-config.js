@@ -72,48 +72,6 @@ const plugins = [
         cache_control: process.env.S3_CACHE_CONTROL
     },
   },
-  {
-    resolve: `medusa-plugin-contentful`,
-    options: {
-      space_id: process.env.CONTENTFUL_SPACE_ID,
-      access_token: process.env.CONTENTFUL_ACCESS_TOKEN,
-      environment: process.env.CONTENTFUL_ENV,
-      custom_product_fields: {
-        title: "name",
-        subtitle: "subtitle",
-        description: "description",
-        variants: "variants",
-        options: "options",
-        medusaId: "medusaId",
-        type: "type",
-        collection: "collection",
-        tags: "tags",
-        handle: "handle",
-      },
-      custom_variant_fields: {
-        title: "name",
-        sku: "sku",
-        prices: "prices",
-        options: "options",
-        medusaId: "medusaId"
-      },
-      custom_region_fields: {
-        name: "name",
-        countries: "countries",
-        paymentProviders: "paymentProviders",
-        fulfillmentProviders: "fulfillmentProviders",
-        medusaId: "medusaId"
-      },
-      custom_collection_fields: {
-        title: "title",
-        medusaId: "medusaId"
-      },
-      custom_type_fields: {
-        name: "name",
-        medusaId: "medusaId"
-      },
-    },
-  },
 ];
 
 const modules = {
