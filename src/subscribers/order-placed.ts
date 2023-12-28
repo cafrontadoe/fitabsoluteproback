@@ -26,8 +26,8 @@ import {
   }
   
   export const config: SubscriberConfig = {
-    event: OrderService.Events.PLACED,
+    event: OrderService.Events.FULFILLMENT_CREATED,
     context: {
-      subscriberId: "order-placed-handler",
+      subscriberId: "order-capture-fulfill",
     },
   }
