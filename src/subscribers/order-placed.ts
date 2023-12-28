@@ -23,7 +23,10 @@ class OrderPlacedSubscriber {
         const order = await this.orderService.retrieve(data.id, { relations: ["items"] })
 
         // auto-capture payment
+        console.log('-------------------------------------------------------------------zzzzzzzzzzzz');
         if (order.payment_status !== "captured") {
+            console.log('-------------------------------------------------------------------entra sok');
+
             await this.orderService.capturePayment(order.id)
         }
   };
