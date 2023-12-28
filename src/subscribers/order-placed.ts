@@ -24,6 +24,7 @@ class OrderPlacedSubscriber {
 
         // auto-capture payment
         console.log('-------------------------------------------------------------------zzzzzzzzzzzz');
+        console.log('order.payment_status:'+order.payment_status);
         if (order.payment_status !== "captured") {
             console.log('-------------------------------------------------------------------entra sok');
 
