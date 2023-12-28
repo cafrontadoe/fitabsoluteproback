@@ -1,33 +1,32 @@
-import { 
-    type SubscriberConfig, 
-    type SubscriberArgs,
-    OrderService,
-  } from "@medusajs/medusa"
-  
-  export default async function handleOrderPlaced({ 
-    data, eventName, container, pluginOptions, 
-  }: SubscriberArgs<Record<string, string>>) {
-    const sendGridService = container.resolve("sendgridService")
-    const orderService: OrderService = container.resolve(
-      "orderService"
-    )
-  
-    const order = await orderService.retrieve(data.id, {
-      // you can include other relations as well
-      relations: ["items"],
-    })
+import { ConfigModule, EventBusService, CartService, OrderService } from "@medusajs/medusa";
 
-     // auto-capture payment
-     if (order.payment_status !== "captured") {
-        await orderService.capturePayment(order.id);
+type InjectedDependencies = {
+  eventBusService: EventBusService;
+  configModule: ConfigModule;
+  cartService: CartService;
+  orderService: OrderService;
+};
+
+class OrderPlacedSubscriber {
+    cartService: any;
+    orderService: any;
+    orderRepository: any;
+    constructor({ eventBusService, cartService, orderService, orderRepository }) {
+        this.cartService = cartService
+        this.orderService = orderService
+        this.orderRepository = orderRepository
+
+        eventBusService.subscribe("order.placed", this.handleOrderPlaced, { subscriberId: "order-capture-fulfill" })
     }
-  
-    
-  }
-  
-  export const config: SubscriberConfig = {
-    event: OrderService.Events.FULFILLMENT_CREATED,
-    context: {
-      subscriberId: "order-capture-fulfill",
-    },
-  }
+
+    handleOrderPlaced = async (data) => {
+        const order = await this.orderService.retrieve(data.id, { relations: ["items"] })
+
+        // auto-capture payment
+        if (order.payment_status !== "captured") {
+            await this.orderService.capturePayment(order.id)
+        }
+  };
+}
+
+export default OrderPlacedSubscriber;
