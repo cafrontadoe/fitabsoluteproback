@@ -26,8 +26,8 @@ class OrderPlacedSubscriber {
         console.log('-------------------------------------------------------------------zzzzzzzzzzzz');
         console.log('order.payment_status:'+order.payment_status);
         if (order.payment_status !== "captured") {
-            console.log('-------------------------------------------------------------------entra sok');
-            await new Promise(resolve => setTimeout(resolve, 500));  // 1 second delay
+          await new Promise(resolve => setTimeout(resolve, 500));  // 1 second delay
+          console.log('-------------------------------------------------------------------entra sok');
            const result =  await this.orderService.capturePayment(order.id);
 
            console.log('resullt: '+result);
